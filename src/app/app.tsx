@@ -1,15 +1,16 @@
 import { BrowserRouter } from 'react-router-dom'
-
-import { AuthProvider } from '@/hooks/AuthProvider'
-
 import { AppRoutes } from './routes'
-
+import { Suspense } from 'react'
+import './app.css'
+import MetaMaskProvider from '@/providers/MetamaskProvider'
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <MetaMaskProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <AppRoutes />
+        </Suspense>
+      </MetaMaskProvider>
     </BrowserRouter>
   )
 }

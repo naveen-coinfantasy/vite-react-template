@@ -1,28 +1,26 @@
-import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons'
-import type { Config } from 'tailwindcss'
-import { fontFamily } from 'tailwindcss/defaultTheme'
-
 export default {
-  content: ['./src/**/*!(*.stories|*.spec).{ts,tsx}', 'stories/*.stories.{ts,tsx}', 'index.html'],
-  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter Variable', ...fontFamily.sans],
-        mono: ['JetBrains Mono Variable', ...fontFamily.mono],
+      backgroundImage: {
+        'primary-gradient': 'linear-gradient(90deg, #5606FF 0%, #FE8989 100%);',
       },
-      colors: ({ colors }) => ({
-        primary: colors.indigo,
-        destructive: colors.red,
-      }),
+      colors: {
+        'primary-blue': {
+          DEFAULT: '#101828',
+
+          100: '#1D2939',
+        },
+        'secondary-blue': '#101828',
+        'light-gray': '#98A2B3',
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+        },
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
-    require('tailwindcss-animate'),
-    require('tailwindcss-react-aria-components'),
-    iconsPlugin({ collections: getIconCollections(['lucide']) }),
-  ],
-} satisfies Config
+  plugins: [require('tailwindcss-animate')],
+}

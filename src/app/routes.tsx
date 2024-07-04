@@ -1,31 +1,32 @@
+import { Login } from '@/pages/login'
 import { useRoutes } from 'react-router-dom'
-
-import { AppLayout, AuthLayout } from '@/components/layouts'
-import { withAdmin, withLoggedIn, withLoggedOut } from '@/hooks/AuthContext'
-import Error404 from '@/pages/404'
-import { AdminDashboard } from '@/pages/admin'
-import { Login, Recovery, ResetPassword } from '@/pages/auth'
+import { PublicRoute } from './PublicRoute'
+import ErrorPage from './ErrorPage'
+import { PrivateRoute } from './PrivateRoute'
 import Home from '@/pages/home'
-import { UserDashboard } from '@/pages/users'
+
+
 
 export const AppRoutes = () => {
   return useRoutes([
-    { path: '/', element: <Home /> },
     {
-      element: <AuthLayout />,
+      path: '/',
+      element: <PublicRoute/>,
       children: [
-        { path: 'login', element: withLoggedOut(Login)() },
-        { path: 'recovery', element: withLoggedOut(Recovery)() },
-        { path: 'reset-password', element: withLoggedOut(ResetPassword)() },
+        { path: 'login', element: <Login/> },
+        
       ],
     },
     {
-      element: <AppLayout />,
+      path: '/',
+      element: <PrivateRoute/>,
       children: [
-        { path: 'dashboard', element: withLoggedIn(UserDashboard)() },
-        { path: 'admin', element: withAdmin(AdminDashboard)() },
+        {index:true, element: <Home/>},
+        { path: 'home', element: <Home/> },
+        
       ],
     },
-    { path: '*', element: <Error404 /> },
+    
+    { path: '*', element: <ErrorPage /> },
   ])
 }
