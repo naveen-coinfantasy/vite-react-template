@@ -16,7 +16,7 @@ export default defineConfig({
     emptyOutDir: true,
     chunkSizeWarningLimit: 1024,
     reportCompressedSize: false,
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(__dirname, 'build'),
     rollupOptions: {
       input: {
         app: resolve(__dirname, 'index.html'),
